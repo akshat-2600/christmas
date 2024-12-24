@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merry Christmas & Happy New Year</title>
+    <style>
+        @font-face {
+            font-family: 'Algerian';
+            src: local('Algerian');
+        }
+        body {
+            margin: 0;
+            padding: 20px;
+            background-image: url('christmasbackground.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            color: white;
+            overflow: hidden;
+        }
+        .message-container {
+            text-align: center;
+            padding-top: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        .message {
+            font-size: 3rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-family: 'Algerian', serif;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+            animation: colorChange 3s infinite alternate;
+            color: #ff4c00;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+        .sub-message {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            text-transform: none;
+            letter-spacing: 1px;
+        }
+        @keyframes colorChange {
+            0% { color: #ff4c00; text-shadow: 0 0 10px #ff4c00; }
+            50% { color: #ff00ff; text-shadow: 0 0 20px #ff00ff; }
+            100% { color: #ff0000; text-shadow: 0 0 30px #ff0000; }
+        }
+        .play-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff0000;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            font-family: 'Pacifico', cursive;
+            z-index: 2;
+        }
+        .snowflake {
+            position: fixed;
+            color: #fff;
+            font-size: 1em;
+            font-family: Arial, sans-serif;
+            text-shadow: 0 0 5px #000;
+            z-index: 1;
+        }
+    </style>
+    <link href="christmasbackground.jpg" rel="stylesheet">
+</head>
+<body>
+    <div class="message-container">
+        <div class="message">
+            🎄MERRY CHRISTMAS AND A HAPPY NEW YEAR🎄
+            <div class="sub-message">Wishing you peace, joy, and love this holiday season!</div>
+        </div>
+    </div>
+    <button class="play-button" onclick="toggleMusic()">Play Music</button>
+    <audio id="backgroundMusic" loop>
+        <source src="we-wish-you-a-merry-christmas-dubstep-remix-holiday-background-music-265800.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+        const music = document.getElementById('backgroundMusic');
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        }
+
+        // Snowfall Animation
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.innerHTML = '❅';
+            
+            snowflake.style.left = Math.random() * window.innerWidth + 'px';
+            snowflake.style.opacity = Math.random();
+            snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+            
+            document.body.appendChild(snowflake);
+            
+            let positionY = 0;
+            let speedY = Math.random() * 2 + 1;
+            let speedX = Math.random() * 2 - 1;
+            let positionX = parseFloat(snowflake.style.left);
+            
+            function fall() {
+                positionY += speedY;
+                positionX += speedX;
+                snowflake.style.top = positionY + 'px';
+                snowflake.style.left = positionX + 'px';
+                
+                if (positionY > window.innerHeight) {
+                    snowflake.remove();
+                } else {
+                    requestAnimationFrame(fall);
+                }
+            }
+            
+            requestAnimationFrame(fall);
+        }
+
+        // Create new snowflakes periodically
+        setInterval(createSnowflake, 100);
+    </script>
+</body>
+</html>
